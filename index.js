@@ -13,29 +13,24 @@ class Transaction {
     this.account = account;
     this.amount = amount;
   }
+  commit() {
+    this.account.balance += this.value;
+  }
 }
 
-// withdrawal class
+//withdrawal class
 class Withdrawal extends Transaction {
   
-  get value(value) {
-    return this.amount;
-  }
-
-  commit() {
-    this.account.balance -= this.amount;
+  get value() {
+    return -this.amount;
   }
 }
 
 //deposit class
 class Deposit extends Transaction {
 
-  get value(value) {
+  get value() {
     return this.amount;
-  }
-
-  commit() {
-    this.account.balance += this.amount;
   }
 }
 
@@ -44,9 +39,10 @@ class Deposit extends Transaction {
 
 // DRIVER CODE BELOW
 // We use the code below to "drive" the application logic above and make sure it's working as expected
-const myAccount = new Account('snow-patrol', 500);
+const myAccount = new Account('snow-patrol', 450);
 
 t1 = new Withdrawal(myAccount, 50.25)
+console.log(t1);
 t1.commit();
 console.log('Transaction1: ', t1);
 
